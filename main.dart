@@ -1,121 +1,263 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+void main() => runApp(const RuangKitaApp());
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class RuangKitaApp extends StatelessWidget {
+  const RuangKitaApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
+      title: 'RuangKita JPTK',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a purple toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
-        colorScheme: .fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFFAA87DC)),
+        scaffoldBackgroundColor: const Color(0xFFFBF8FF),
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const HalamanUtama(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
+class HalamanUtama extends StatefulWidget {
+  const HalamanUtama({super.key});
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<HalamanUtama> createState() => _HalamanUtamaState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+class _HalamanUtamaState extends State<HalamanUtama> {
+  int halaman = 0;
+  static const ungu = Color(0xFF7957A7);
+  static const gelap = Color(0xFF403258);
 
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
+  void info(String pesan) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(pesan),
+        behavior: SnackBarBehavior.floating,
+        backgroundColor: ungu,
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
       appBar: AppBar(
-        // TRY THIS: Try changing the color here to a specific color (to
-        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-        // change color while the other colors stay the same.
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          //
-          // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
-          // action in the IDE, or press "p" in the console), to see the
-          // wireframe for each widget.
-          mainAxisAlignment: .center,
+        backgroundColor: const Color(0xFFFBF8FF),
+        title: const Row(
           children: [
-            const Text('You have pushed the button this many times:'),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
+            Icon(Icons.meeting_room_rounded, color: ungu),
+            SizedBox(width: 8),
+            Text('RuangKita JPTK',
+                style: TextStyle(fontSize: 19, fontWeight: FontWeight.bold)),
+          ],
+        ),
+        actions: [
+          IconButton(
+            tooltip: 'Tentang aplikasi',
+            icon: const Icon(Icons.info_outline_rounded),
+            onPressed: () => info('Prototipe awal UAS Flutter - Minggu 1'),
+          ),
+        ],
+      ),
+      body: SafeArea(
+        child: IndexedStack(
+          index: halaman,
+          children: [
+            beranda(),
+            halamanRencana(Icons.calendar_month_rounded, 'Jadwal Ruangan',
+                'Kalender ketersediaan akan dibuat pada Minggu 2.'),
+            halamanRencana(Icons.history_rounded, 'Riwayat Peminjaman',
+                'Riwayat akan ditampilkan setelah integrasi Firestore.'),
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
+      bottomNavigationBar: NavigationBar(
+        selectedIndex: halaman,
+        onDestinationSelected: (index) => setState(() => halaman = index),
+        backgroundColor: Colors.white,
+        indicatorColor: const Color(0xFFEBDDFF),
+        destinations: const [
+          NavigationDestination(icon: Icon(Icons.home_rounded), label: 'Beranda'),
+          NavigationDestination(
+              icon: Icon(Icons.calendar_month_rounded), label: 'Jadwal'),
+          NavigationDestination(
+              icon: Icon(Icons.history_rounded), label: 'Riwayat'),
+        ],
+      ),
+    );
+  }
+
+  Widget beranda() {
+    return ListView(
+      padding: const EdgeInsets.all(20),
+      children: [
+        Container(
+          padding: const EdgeInsets.all(24),
+          decoration: BoxDecoration(
+            gradient: const LinearGradient(
+              colors: [Color(0xFFDAC4FF), Color(0xFFB99BEF)],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+            borderRadius: BorderRadius.circular(24),
+          ),
+          child: const Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Chip(
+                label: Text('PROTOTIPE MINGGU 1',
+                    style: TextStyle(color: ungu, fontSize: 11)),
+                backgroundColor: Color(0xFFF7EEFF),
+                side: BorderSide.none,
+              ),
+              SizedBox(height: 12),
+              Icon(Icons.event_available_rounded, size: 42, color: gelap),
+              SizedBox(height: 12),
+              Text('Butuh ruangan\nuntuk kegiatanmu?',
+                  style: TextStyle(
+                      fontSize: 27,
+                      fontWeight: FontWeight.bold,
+                      height: 1.2,
+                      color: gelap)),
+              SizedBox(height: 10),
+              Text('Jelajahi Ruang Sidang dan Aula JPTK FKIP UNS\n'
+                  'dengan lebih mudah.',
+                  style: TextStyle(fontSize: 14, height: 1.5, color: gelap)),
+            ],
+          ),
+        ),
+        const SizedBox(height: 26),
+        const Text('Pilihan Ruangan',
+            style: TextStyle(
+                fontSize: 21, fontWeight: FontWeight.bold, color: gelap)),
+        const SizedBox(height: 5),
+        const Text('Kenali ruangan yang akan tersedia di aplikasi.',
+            style: TextStyle(color: Color(0xFF82768F))),
+        const SizedBox(height: 16),
+        kartuRuang('Ruang Sidang', 'Untuk rapat dan kegiatan akademik.',
+            Icons.groups_rounded),
+        const SizedBox(height: 14),
+        kartuRuang('Aula JPTK', 'Untuk pertemuan dan kegiatan bersama.',
+            Icons.apartment_rounded),
+        const SizedBox(height: 18),
+        const Card(
+          color: Color(0xFFF1E8FF),
+          elevation: 0,
+          child: Padding(
+            padding: EdgeInsets.all(16),
+            child: Row(
+              children: [
+                Icon(Icons.lightbulb_outline_rounded, color: ungu),
+                SizedBox(width: 12),
+                Expanded(
+                  child: Text(
+                    'Fitur berikutnya: cek jadwal, ajukan peminjaman, '
+                    'dan pantau status persetujuan.',
+                    style: TextStyle(color: gelap, height: 1.4),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget kartuRuang(String nama, String deskripsi, IconData ikon) {
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        border: Border.all(color: const Color(0xFFE6D7F7)),
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: Column(
+        children: [
+          Row(
+            children: [
+              Container(
+                width: 58,
+                height: 58,
+                decoration: BoxDecoration(
+                  color: const Color(0xFFF0E5FF),
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                child: Icon(ikon, size: 30, color: ungu),
+              ),
+              const SizedBox(width: 14),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(nama,
+                        style: const TextStyle(
+                            fontSize: 17,
+                            fontWeight: FontWeight.bold,
+                            color: gelap)),
+                    const SizedBox(height: 4),
+                    const Text('JPTK FKIP UNS',
+                        style: TextStyle(color: Color(0xFF82768F))),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 13),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Text(deskripsi,
+                style: const TextStyle(color: Color(0xFF756982))),
+          ),
+          const SizedBox(height: 12),
+          SizedBox(
+            width: double.infinity,
+            child: OutlinedButton.icon(
+              onPressed: () => info('Form peminjaman $nama dibuat pada Minggu 2.'),
+              icon: const Icon(Icons.arrow_forward_rounded),
+              label: const Text('Ajukan Peminjaman'),
+              style: OutlinedButton.styleFrom(
+                foregroundColor: ungu,
+                side: const BorderSide(color: Color(0xFFD7C2F0)),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget halamanRencana(IconData ikon, String judul, String deskripsi) {
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.all(28),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            CircleAvatar(
+              backgroundColor: const Color(0xFFECDDFF),
+              radius: 42,
+              child: Icon(ikon, size: 40, color: ungu),
+            ),
+            const SizedBox(height: 16),
+            Text(judul,
+                style: const TextStyle(
+                    fontSize: 21, fontWeight: FontWeight.bold, color: gelap)),
+            const SizedBox(height: 8),
+            Text(deskripsi,
+                textAlign: TextAlign.center,
+                style: const TextStyle(color: Color(0xFF82768F))),
+            const SizedBox(height: 16),
+            FilledButton(
+              onPressed: () => setState(() => halaman = 0),
+              child: const Text('Kembali ke Beranda'),
+            ),
+          ],
+        ),
       ),
     );
   }
