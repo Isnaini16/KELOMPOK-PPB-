@@ -1,4 +1,4 @@
-# KELOMPOK-PPB-
+# KELOMPOK 1 PROJEK UAS PPB
 Proyek Aplikasi Website Peminjaman  Ruang di JPTK
 
 ## Anggota Kelompok
