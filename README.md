@@ -1,5 +1,5 @@
 # KELOMPOK-PPB-
-Proyek Aplikasi Mobile PPB - 
+Proyek Aplikasi Website Peminjaman  Ruang di JPTK
 
 ## Anggota Kelompok
 1. Adinda Putri Utami - [K3524002]
