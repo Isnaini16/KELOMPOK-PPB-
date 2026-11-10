@@ -9,3 +9,4 @@ Proyek Aplikasi Website Peminjaman  Ruang di JPTK
 
 ## Status Proyek
 - Minggu 1: Inisialisasi Repository & Perancangan Ide
+- Minggu 2:  Implementasi Antarmuka dan Integrasi Data
