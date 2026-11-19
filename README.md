@@ -1,12 +1,17 @@
-# KELOMPOK 1 PROJEK UAS PPB
-Proyek Aplikasi Website Peminjaman  Ruang di JPTK
+# peminjaman_ruang_jptk
 
-## Anggota Kelompok
-1. Adinda Putri Utami - [K3524002]
-2. Ade Amanah Putri - [K3524018]
-3. Salsabila Khoiriyatin Nur Isnaini - [K3524036]
-4. Afifah Zahrah Muthmainnah - [K3524072]
+A new Flutter project.
 
-## Status Proyek
-- Minggu 1: Inisialisasi Repository & Perancangan Ide
-- Minggu 2:  Implementasi Antarmuka dan Integrasi Data
+## Getting Started
+
+This project is a starting point for a Flutter application.
+
+A few resources to get you started if this is your first Flutter project:
+
+- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
+- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
+- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+
+For help getting started with Flutter development, view the
+[online documentation](https://docs.flutter.dev/), which offers tutorials,
+samples, guidance on mobile development, and a full API reference.

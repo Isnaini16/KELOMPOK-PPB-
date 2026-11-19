@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "111092999433",
+    "project_id": "sipirang-jptk",
+    "storage_bucket": "sipirang-jptk.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:111092999433:android:31b4bec13f006aa5d19fd8",
+        "android_client_info": {
+          "package_name": "com.example.peminjaman_ruang_jptk"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDn4SG8zs-vbGlMvbAXNnvapQRgZ9j6Nu0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
