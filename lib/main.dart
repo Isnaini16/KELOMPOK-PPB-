@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart'; // Tetap gunakan file asli hasil flutterfire configure!
+import 'firebase_options.dart';
 import 'core/app_theme.dart';
 import 'screens/guest/guest_shell.dart';
 
