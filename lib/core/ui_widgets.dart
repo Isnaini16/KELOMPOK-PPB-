@@ -19,6 +19,7 @@ class GradientBanner extends StatelessWidget {
     width: double.infinity,
     padding: const EdgeInsets.all(20),
     decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(21),
       gradient: const LinearGradient(
         colors: [Color(0xFFBC98F0), Color(0xFF7952C3)],
         begin: Alignment.topLeft,
