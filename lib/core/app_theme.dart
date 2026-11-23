@@ -19,6 +19,73 @@ class AppTheme {
       seedColor: Palette.primary,
       surface: Palette.background,
     );
-    return ThemeData();
+    return ThemeData(
+      useMaterial3: true,
+      colorScheme: scheme,
+      scaffoldBackgroundColor: Palette.background,
+      appBarTheme: const AppBarTheme(
+        backgroundColor: Palette.background,
+        foregroundColor: Palette.ink,
+        surfaceTintColor: Colors.transparent,
+        elevation: 0,
+        centerTitle: true,
+        titleTextStyle: TextStyle(
+          fontSize: 17,
+          fontWeight: FontWeight.w700,
+          color: Palette.ink,
+        ),
+      ),
+      inputDecorationTheme: InputDecorationTheme(
+        filled: true,
+        fillColor: Colors.white,
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 15,
+          vertical: 13,
+        ),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(13)),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(13),
+          borderSide: const BorderSide(color: Color(0xFFE9E1F3)),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(13),
+          borderSide: const BorderSide(color: Palette.primary, width: 1.5),
+        ),
+      ),
+      cardTheme: CardThemeData(
+        color: Colors.white,
+        shadowColor: const Color(0xFF5E3989).withValues(alpha: .09),
+        elevation: 2,
+        surfaceTintColor: Colors.transparent,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(17)),
+      ),
+      filledButtonTheme: FilledButtonThemeData(
+        style: FilledButton.styleFrom(
+          backgroundColor: Palette.primary,
+          foregroundColor: Colors.white,
+          minimumSize: const Size(0, 49),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(13),
+          ),
+        ),
+      ),
+      outlinedButtonTheme: OutlinedButtonThemeData(
+        style: OutlinedButton.styleFrom(
+          foregroundColor: Palette.primary,
+          minimumSize: const Size(0, 48),
+          side: const BorderSide(color: Palette.primary),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(13),
+          ),
+        ),
+      ),
+      navigationBarTheme: NavigationBarThemeData(
+        backgroundColor: Colors.white,
+        indicatorColor: Palette.lavender,
+        labelTextStyle: WidgetStateProperty.all(
+          const TextStyle(fontSize: 11, color: Palette.ink),
+        ),
+      ),
+    );
   }
 }
