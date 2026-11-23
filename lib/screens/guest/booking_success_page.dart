@@ -57,3 +57,4 @@ class _Detail extends StatelessWidget {
     ]),
   );
 }
+
